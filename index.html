@@ -9,7 +9,7 @@ const questions=[{q:'¿Qué describe mejor la identidad digital?',a:['Solo la fo
 const goals=['Revisar la privacidad de mis perfiles.','Activar autenticación multifactor en mis cuentas.','No compartir datos de estudiantes en enlaces públicos.','Verificar autorizaciones antes de publicar imágenes escolares.','Usar canales institucionales y lenguaje respetuoso.'];const saved=JSON.parse(localStorage.getItem('compromisoDocente')||'[]');document.getElementById('checklist').innerHTML=goals.map((g,i)=>`<label><input type="checkbox" data-goal="${i}" ${saved.includes(i)?'checked':''}>${g}</label>`).join('');function saveGoals(){const arr=[...document.querySelectorAll('[data-goal]:checked')].map(x=>Number(x.dataset.goal));localStorage.setItem('compromisoDocente',JSON.stringify(arr));trackGoals(arr.length);document.getElementById('checkstatus').textContent=`${arr.length} de ${goals.length} compromisos seleccionados · Guardados en este dispositivo.`}document.querySelectorAll('[data-goal]').forEach(x=>x.addEventListener('change',saveGoals));saveGoals();
 
 // CONFIGURACIÓN DOCENTE: pega aquí la URL de implementación /exec de Google Apps Script.
-const TRACKING_ENDPOINT = ''; // Ejemplo: https://script.google.com/macros/s/.../exec
+const TRACKING_ENDPOINT = 'https://script.google.com/a/macros/virgendelrosario.edu.py/s/AKfycbwaw3Cjd-cG1yppWhOv165aDMkN5CFknHoj1H3F04Td36khQDeLHxye6nTw5phTxqPNgQ/exec'; // Ejemplo: https://script.google.com/macros/s/.../exec
 const TRACKING_VERSION='aula-digital-v2';
 function studentKey(){return activeStudent?'aulaProgress:'+activeStudent.name.toLowerCase()+'|'+activeStudent.course.toLowerCase()+'|'+activeStudent.code:''}
 function getProgress(){try{return JSON.parse(localStorage.getItem(studentKey())||'{}')}catch{return {}}}
